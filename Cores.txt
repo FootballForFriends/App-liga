@@ -5,3 +5,9 @@ Cor default: A4FFB3
 //Adicionais
 00A61D
 00801
+
+//Fifa 20
+#ef4161 // rosa
+#f2f2f2 // cinza
+#a7a8a2 // cinza escuro
+#50f0f0 // azul, primary
