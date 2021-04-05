@@ -7,7 +7,7 @@ import ptBr from 'antd/es/locale/pt_BR';
 ReactDOM.render(
   <React.StrictMode>
     <ConfigProvider locale={ptBr}>
-    <App />
+      <App />
     </ConfigProvider>
   </React.StrictMode>,
   document.getElementById('root')

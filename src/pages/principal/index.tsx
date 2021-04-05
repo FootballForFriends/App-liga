@@ -1,4 +1,3 @@
-import React from 'react'
 import { Row, Col, Button, Input } from 'antd';
 import CustomTable from '../../componentes/table';
 
