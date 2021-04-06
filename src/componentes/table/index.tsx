@@ -75,6 +75,7 @@ const EditableCell = ({ title, editable, children, dataIndex, record, handleSave
 
 interface IProps {
   data: any[];
+  setData: React.Dispatch<React.SetStateAction<any[]>>
 }
 /*  [
   {
@@ -90,18 +91,11 @@ interface IProps {
 ]
 */
 
-const CustomTable: React.FC<IProps> = ({ data }) => {
-  const [dataSource, setDataSource] = React.useState({
-    data: data,
-    count: data.length
-  });
+const CustomTable: React.FC<IProps> = (props) => {
+  const { data, setData } = props;
 
   const handleDelete = (key: any) => {
-    const aux = [...dataSource.data];
-    setDataSource({
-      ...dataSource,
-      data: aux.filter((item: any) => item.key !== key)
-    });
+    setData((data) => data.filter((item: any) => item.key !== key));
   };
 
   const columns = [
@@ -127,7 +121,7 @@ const CustomTable: React.FC<IProps> = ({ data }) => {
       title: "Ações",
       dataIndex: "operation",
       render: (text: any, record: any) =>
-        dataSource.data.length >= 1 ? (
+        data.length >= 1 ? (
           <Popconfirm
             title="Sure to delete?"
             onConfirm={() => handleDelete(record.key)}
@@ -148,7 +142,7 @@ const CustomTable: React.FC<IProps> = ({ data }) => {
       components={components}
       rowClassName={() => "editable-row"}
       bordered
-      dataSource={dataSource.data}
+      dataSource={data}
       columns={columns}
     />
   )

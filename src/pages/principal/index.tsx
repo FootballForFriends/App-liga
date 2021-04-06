@@ -11,7 +11,7 @@ interface IFormProps {
 
 const Principal: React.FC = () => {
   const [form] = Form.useForm();
-  const [jogadores, setJogadores] = React.useState<IFormProps[]>([]);
+  const [jogadores, setJogadores] = React.useState<IFormProps[]>([{ nome: "asd", time: "teste", corPrimaria: "asd", corSecundaria: "asd", key: "78de41cc-c45d-407f-b981-e41985ec799e" }]);
   const { Search } = Input;
 
   const onFinish = (values: any) => {
@@ -25,7 +25,6 @@ const Principal: React.FC = () => {
 
     setJogadores([...jogadores, jogador]);
   };
-  console.log(jogadores)
 
   return (<>
     <Row align='middle' justify='space-around'>
@@ -73,7 +72,7 @@ const Principal: React.FC = () => {
     <br />
     <Row align='middle' justify='center'>
       <Col flex='90%'>
-        <CustomTable data={jogadores} />
+        <CustomTable data={jogadores} setData={setJogadores} />
       </Col>
     </Row>
   </>)
