@@ -77,19 +77,6 @@ interface IProps {
   data: any[];
   setData: React.Dispatch<React.SetStateAction<any[]>>
 }
-/*  [
-  {
-    key: "0",
-    name: "Jose champs",
-    age: "Pereba futebol clube"
-  },
-  {
-    key: "1",
-    name: "José não champs",
-    age: "Os perna quebrada futebool clube"
-  }
-]
-*/
 
 const CustomTable: React.FC<IProps> = (props) => {
   const { data, setData } = props;

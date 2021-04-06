@@ -11,7 +11,15 @@ interface IFormProps {
 
 const Principal: React.FC = () => {
   const [form] = Form.useForm();
-  const [jogadores, setJogadores] = React.useState<IFormProps[]>([{ nome: "asd", time: "teste", corPrimaria: "asd", corSecundaria: "asd", key: "78de41cc-c45d-407f-b981-e41985ec799e" }]);
+  const [jogadores, setJogadores] = React.useState<IFormProps[]>(
+    [
+      { nome: "Jose champs", time: "Pereba futebol clube", corPrimaria: "azul", corSecundaria: "vermelho", key: "78de41cc-c45d-407f-b981-e41985ec799e" },
+      { nome: "Wanderlei não champs", time: "Os perna quebrada futebool clube", corPrimaria: "verde", corSecundaria: "preto", key: "78de41cc-c45d-407f-b981-e41985ec789e" }
+    ]
+  );
+
+  const [search, setSearch] = React.useState<IFormProps[]>([]);
+
   const { Search } = Input;
 
   const onFinish = (values: any) => {
@@ -26,6 +34,14 @@ const Principal: React.FC = () => {
     setJogadores([...jogadores, jogador]);
   };
 
+  const handleSearch = (value: string, event?: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLElement, MouseEvent> | React.KeyboardEvent<HTMLInputElement> | undefined) => {
+    if (value === '') {
+      setJogadores([]);
+    } else {
+      setSearch(() => jogadores.filter(jogador => jogador.nome.contains(value)));
+    }
+  }
+
   return (<>
     <Row align='middle' justify='space-around'>
       <Col flex='90%'>
@@ -33,7 +49,7 @@ const Principal: React.FC = () => {
           <Col flex='auto'>
             <Search
               placeholder='Pesquisar...'
-              onSearch={(value: any) => console.log('buscando...', value)}
+              onSearch={handleSearch}
               style={{ width: '100%' }}
             />
           </Col>
@@ -72,7 +88,7 @@ const Principal: React.FC = () => {
     <br />
     <Row align='middle' justify='center'>
       <Col flex='90%'>
-        <CustomTable data={jogadores} setData={setJogadores} />
+        <CustomTable data={search.length ? search : jogadores} setData={search.length ? setSearch : setJogadores} />
       </Col>
     </Row>
   </>)
