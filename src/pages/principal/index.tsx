@@ -11,6 +11,7 @@ interface IFormProps {
 
 const Principal: React.FC = () => {
   const [form] = Form.useForm();
+  const [loading, setLoading] = React.useState(false);
   const [jogadores, setJogadores] = React.useState<IFormProps[]>(
     [
       { nome: "Jose champs", time: "Pereba futebol clube", corPrimaria: "azul", corSecundaria: "vermelho", key: "78de41cc-c45d-407f-b981-e41985ec799e" },
@@ -35,10 +36,12 @@ const Principal: React.FC = () => {
   };
 
   const handleSearch = (value: string, event?: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLElement, MouseEvent> | React.KeyboardEvent<HTMLInputElement> | undefined) => {
+    setLoading(true);
     if (value === '') {
-      setJogadores([]);
+      setSearch([]);
+      setLoading(false);
     } else {
-      setSearch(() => jogadores.filter(jogador => jogador.nome.contains(value)));
+      setSearch(() => jogadores.filter(jogador => jogador.nome.toLocaleLowerCase().includes(value.toLocaleLowerCase())));
     }
   }
 
@@ -49,6 +52,8 @@ const Principal: React.FC = () => {
           <Col flex='auto'>
             <Search
               placeholder='Pesquisar...'
+              allowClear
+              loading={loading}
               onSearch={handleSearch}
               style={{ width: '100%' }}
             />
@@ -88,7 +93,7 @@ const Principal: React.FC = () => {
     <br />
     <Row align='middle' justify='center'>
       <Col flex='90%'>
-        <CustomTable data={search.length ? search : jogadores} setData={search.length ? setSearch : setJogadores} />
+        <CustomTable data={loading ? search : jogadores} setData={loading ? setSearch : setJogadores} />
       </Col>
     </Row>
   </>)
