@@ -1,25 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { uuid } from 'uuidv4';
 import { BgColorsOutlined, UserOutlined, VerifiedOutlined } from '@ant-design/icons';
 import { Row, Col, Input, Form } from 'antd';
 import ModalButton from '../../componentes/modal';
 import CustomTable from '../../componentes/table';
+import ColorPicker from '../../componentes/color-picker';
+import { Color } from 'react-color';
 
 interface IFormProps {
   [key: string]: any;
 }
 
 const Principal: React.FC = () => {
+  const [color, setColor] = useState<Color>('#FFF');
   const [form] = Form.useForm();
-  const [loading, setLoading] = React.useState(false);
-  const [jogadores, setJogadores] = React.useState<IFormProps[]>(
+  const [loading, setLoading] = useState(false);
+  const [jogadores, setJogadores] = useState<IFormProps[]>(
     [
       { nome: "Jose champs", time: "Pereba futebol clube", corPrimaria: "azul", corSecundaria: "vermelho", key: "78de41cc-c45d-407f-b981-e41985ec799e" },
       { nome: "Wanderlei não champs", time: "Os perna quebrada futebool clube", corPrimaria: "verde", corSecundaria: "preto", key: "78de41cc-c45d-407f-b981-e41985ec789e" }
     ]
   );
 
-  const [search, setSearch] = React.useState<IFormProps[]>([]);
+  const [search, setSearch] = useState<IFormProps[]>([]);
 
   const { Search } = Input;
 
@@ -75,7 +78,8 @@ const Principal: React.FC = () => {
 
                   <Col flex='auto'>
                     <Form.Item name='corPrimaria'>
-                      <Input placeholder="Cor primária" prefix={<BgColorsOutlined />} />
+                      {/* <Input placeholder="Cor primária" prefix={<BgColorsOutlined />} /> */}
+                      <ColorPicker color={color} setColor={setColor} />
                     </Form.Item>
                   </Col>
                   <Col flex='auto'>
