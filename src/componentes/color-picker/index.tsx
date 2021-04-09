@@ -1,12 +1,10 @@
 import { FC, useState } from 'react';
 import { Color, ColorResult, SketchPicker } from 'react-color';
 
-
 interface IColorPickerProps {
   color: Color;
   setColor: (value: Color) => void;
 };
-
 
 const ColorPicker: FC<IColorPickerProps> = ({ color, setColor }) => {
   const [open, setOpen] = useState(false);
